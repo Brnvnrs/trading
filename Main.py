@@ -2,5 +2,7 @@ from conectionToBinance import Cliente
 
 class Main(conectionToBinance):
     client: Cliente
-    def __init__(self,):
+    def __init__(self,client):
+        self.clien=client
+
     
