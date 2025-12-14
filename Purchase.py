@@ -1,4 +1,4 @@
-from binance_connection import cliente
+from binance_connection import ConexionABinance
 class Purchase():
     #atributos principales
     moneda: str
@@ -10,5 +10,5 @@ class Purchase():
     
     def ejecutarCompra(self,cantidadAComprar: float)->None:
         ##aca falta configurar que el monto a comprar tiene que ser multiplo de 0.00001000 y sea mayor al minimo de compra que es 0.00001
-        cliente().order_market_buy(symbol=self.moneda,quantity=cantidadAComprar)
+        self.cliente().order_market_buy(symbol=self.moneda,quantity=cantidadAComprar)
         

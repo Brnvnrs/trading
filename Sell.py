@@ -1,4 +1,4 @@
-from binance_connection import cliente
+from binance_connection import ConexionABinance
 
 class Sell:
     moneda:str
@@ -8,4 +8,4 @@ class Sell:
         self.moneda = moneda
     
     def ejecutarVenta(self,cantidadAVender: float)->None:
-        cliente().order_market_sell(symbol=self.moneda,quantity=cantidadAVender)
+        self.cliente().order_market_sell(symbol=self.moneda,quantity=cantidadAVender)
