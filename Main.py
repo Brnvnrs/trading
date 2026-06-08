@@ -1,9 +1,39 @@
-from conectionToBinance import Cliente
+from binance_connection import ConexionABinance
+from binance.client import Client
 
-class Main(conectionToBinance):
-    client: Cliente
-    def __init__(self,):
-        super()__init__
-        
-    
-    
+INTERVALOS = {
+    "1": Client.KLINE_INTERVAL_1MINUTE,
+    "5": Client.KLINE_INTERVAL_5MINUTE,
+    "15": Client.KLINE_INTERVAL_15MINUTE,
+    "30": Client.KLINE_INTERVAL_30MINUTE,
+    "1h": Client.KLINE_INTERVAL_1HOUR,
+    "4h": Client.KLINE_INTERVAL_4HOUR,
+    "1d": Client.KLINE_INTERVAL_1DAY,
+}
+
+def obtener_cierres(symbol: str, intervalo: str, cantidad: int = 14) -> list[float]:
+    client = ConexionABinance().cliente()
+    klines = client.get_historical_klines(symbol, intervalo, limit=cantidad)
+    return [float(k[4]) for k in klines]  # índice 4 = precio de cierre
+
+def main():
+    symbol = input("Ingresá el símbolo (ej: BTCUSDT): ").upper()
+
+    print("\nIntervalos disponibles:")
+    for key in INTERVALOS:
+        print(f"  {key}")
+
+    eleccion = input("\nElegí el intervalo: ").strip()
+
+    if eleccion not in INTERVALOS:
+        print("Intervalo no válido.")
+        return
+
+    cierres = obtener_cierres(symbol, INTERVALOS[eleccion])
+
+    print(f"\nÚltimos 14 cierres de {symbol} en intervalo {eleccion}:")
+    for i, precio in enumerate(cierres, 1):
+        print(f"  {i:>2}. {precio:.4f} USDT")
+
+if __name__ == "__main__":
+    main()
