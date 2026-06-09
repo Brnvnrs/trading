@@ -6,11 +6,18 @@ class CandleList():
     # period:str
     # lenght:int
     pricesList:list[list]
+    closedPrice:list[float]
     def __init__(self,symbol:str,period:str,length:int):
         # self.candleList=CandleList.Candle 
+        """
+        symbol  : par de monedas a consultar. Ej: 'BTCUSDT', 'ETHUSDT'
+        period  : intervalo de cada vela. Ej: Client.KLINE_INTERVAL_1MINUTE,
+                  Client.KLINE_INTERVAL_1HOUR, Client.KLINE_INTERVAL_1DAY
+        length  : cantidad de velas a traer. Ej: 14
+        """
         super().__init__()
         self.pricesList= self.cliente().get_klines(symbol,period,length)
-
+        self.closedPrice = []
     """ 
     now my pricesList is a list of candle where every candle look like this
     [
@@ -31,6 +38,7 @@ class CandleList():
         # ... más velas
     ]
     """
-    def closePrices(self)->
-        auxList = []
-        for 
+    def closePrices(self)->None:
+        for v in self.pricesList:
+            self.closedPrice.append(v[5])
+    
