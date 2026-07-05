@@ -6,10 +6,12 @@ conn = psycopg2.connect(
     password = "postgres",
     host="localhost",
     port="5432"
-)
+) 
 cur = conn.cursor()
 
-cur.execute("SELECT * FROM operaciones")
+cur.execute(
+    "SELECT * FROM operaciones"
+    )
 #to insert data we can user 
 #cur.execute("INSERT INTO operaciones (moneda, monto, precio, tipo) VALUES (%s,%s,%s,%s)",("ETHUSDT",0.004, 2450.0, True) # T compra, F venta) 
 print(cur.fetchall())
@@ -30,11 +32,33 @@ conn.close()
 
 class DataBase:
     #atributos
+    
+
+
 
     #constructor
-    def __init__(self):
+    def __init__(self,dbname):
         pass
 
     #demas metodos de la clase
     def conectDDBB():
         pass
+    def insertData(currency,amount,price,sellOrBuy):
+        pass
+    def get():
+        pass
+    class Order:
+        currency:float
+        amount: float
+        price: float
+        sellOrBuy:str
+        def __init__(self,currency,amount,price,sellOrBuy):
+            self.currency= currency
+            self.amount = amount
+            self.price= price
+            self.sellOrBuy = sellOrBuy
+        
+
+
+import dataBase
+c = DataBase()

@@ -1,5 +1,12 @@
 from fastapi import FastAPI
 
+'''
+to use this API we need copy and paste this comand in terminal where this archive is  
+uvicorn api:app --host 0.0.0.0 --port 8000 --reload
+and then the terminal give us a link and we can check the api
+
+'''
+
 app = FastAPI()
 @app.get("/")
 
@@ -12,3 +19,7 @@ def read_root():
 @app.get("/users")
 def user():
     return {"users":["brian", "ivan"]}
+
+@app.get("/database")
+def ddbb():
+    ddbb = 
