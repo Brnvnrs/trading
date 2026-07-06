@@ -1,6 +1,7 @@
 from binance_connection import ConexionABinance
 from binance.client import Client
 from filterMoney import LiquidityFilter
+from CandleList import CandleList
 
 monedasFiltradas = LiquidityFilter()
 
@@ -9,19 +10,21 @@ print(monedasFiltradas.listDeMonedas)
 
 
 for monedas in monedasFiltradas.listDeMonedas:
-    # por cada moneda tendriamos que traer al menos sus ultimos 14 valores al cierre 
-    
+    # por cada moneda tendriamos que traer al menos sus ultimos 14 valores al cierre
+    # y luego aplicar una estrategia para cada moneda y despues ir actualizando el valor de esa moneda y nuevamente aplicar la esdtrategia
+    intervalos = {
+        "1": Client.KLINE_INTERVAL_1MINUTE,
+        "5": Client.KLINE_INTERVAL_5MINUTE,
+        "15": Client.KLINE_INTERVAL_15MINUTE,
+        "30": Client.KLINE_INTERVAL_30MINUTE,
+        "1h": Client.KLINE_INTERVAL_1HOUR,
+        "4h": Client.KLINE_INTERVAL_4HOUR,
+        "1d": Client.KLINE_INTERVAL_1DAY,
+    }
+    lista = CandleList(monedas, intervalos{1} ,14)    
+    #aca se aplicaria una o varias estrategias por cada moneda 
 
 
-# INTERVALOS = {
-#     "1": Client.KLINE_INTERVAL_1MINUTE,
-#     "5": Client.KLINE_INTERVAL_5MINUTE,
-#     "15": Client.KLINE_INTERVAL_15MINUTE,
-#     "30": Client.KLINE_INTERVAL_30MINUTE,
-#     "1h": Client.KLINE_INTERVAL_1HOUR,
-#     "4h": Client.KLINE_INTERVAL_4HOUR,
-#     "1d": Client.KLINE_INTERVAL_1DAY,
-# }
 
 # def obtener_cierres(symbol: str, intervalo: str, cantidad: int = 14) -> list[float]:
 #     client = ConexionABinance().cliente()
