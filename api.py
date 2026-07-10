@@ -22,4 +22,4 @@ def user():
 
 @app.get("/database")
 def ddbb():
-    ddbb = 
+    pass
