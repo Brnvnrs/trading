@@ -1,6 +1,7 @@
 #esta clase debe decidir si se debe o no comprar o vender
 from binance_connection import ConexionABinance
 import numpy as np
+from CandleList import CandleList
 class PrecioActual(ConexionABinance):
     
     #la idea es que se ingrese el tipo de moneda ya sea BTCUSDT o el quue sea y el metodo precio me devuelva el precio actual de esa moneda
@@ -14,18 +15,12 @@ class PrecioActual(ConexionABinance):
 
 
 class Estrategia():
-    listaDePrecios: list
-        
-    def __init__(self,listaDePrecios):
-        
-        self.listaDePrecios = listaDePrecios
-        
-    def ultimoValor(self,precioMoneda:float):
-        logPrecios = np.log(self.listaDePrecios)
-        shape, loc, scale = lognorm.fit(log_precios, floc=0)
-        
-        prob = lognorm.cdf(precio_actual, shape, loc, scale)
-        if(prob < alpha):
-            #comprar
-        else if(prob > 1-alpha):
-            #vender
+
+    #atributos 
+    dictMoney:dict[str,CandleList]
+
+    #constructor
+    def __init__(self,dictMoney:dict[str,CandleList]):
+        self.dictMoney = dictMoney
+    def update():
+        pass 

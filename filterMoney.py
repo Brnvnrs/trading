@@ -1,4 +1,6 @@
 from binance_connection import ConexionABinance
+from CandleList import CandleList
+from binance_connection import Client
 '''
 LiquidityFilter
 ---------------
@@ -20,7 +22,7 @@ class LiquidityFilter(ConexionABinance):
     min_volumen: float
     max_spread: float
     min_profundidad: float
-    listDeMonedas: list[str]
+    dictMoney: dict[str,CandleList]
     symbols: list[str]
  
     def __init__(
@@ -33,7 +35,7 @@ class LiquidityFilter(ConexionABinance):
         self.min_volumen = min_volumen
         self.max_spread = max_spread
         self.min_profundidad = min_profundidad
-        self.listDeMonedas = []
+        self.dictMoney = {}
  
         client = self.cliente()
         exchangeInfo = client.get_exchange_info()
@@ -73,7 +75,7 @@ class LiquidityFilter(ConexionABinance):
         )
  
     def filtrar(self, verbose: bool = True) -> None:
-        self.listDeMonedas = []  # resetea por si se llama más de una vez
+        self.dictMoney = {}  # resetea por si se llama más de una vez
  
         for symbol in self.symbols:
             try:
@@ -90,11 +92,12 @@ class LiquidityFilter(ConexionABinance):
                     )
  
                 if pasa:
-                    self.listDeMonedas.append(symbol)
+                    candles = CandleList(symbol, Client.KLINE_INTERVAL_1HOUR, 14)
+                    candles.closePrices()
+                    self.dictMoney[symbol] = candles.closedPrice
+
  
             except Exception as e:
                 if verbose:
                     print(f"⚠️  {symbol:<12} | Error: {e}")
  
-        if verbose:
-            print(f"\n📊 {len(self.listDeMonedas)}/{len(self.symbols)} monedas pasaron el filtro.")

@@ -2,6 +2,8 @@ from binance_connection import ConexionABinance
 from binance.client import Client
 from filterMoney import LiquidityFilter
 from CandleList import CandleList
+from strategy import Estrategia
+
 
 monedasFiltradas = LiquidityFilter()
 
@@ -25,13 +27,11 @@ for monedas in monedasFiltradas.listDeMonedas:
     #aca se aplicaria una o varias estrategias por cada moneda 
 
 # get prices => update state => execute strategy => get prices ...
-class ListPrices:    
-    def __init__(self):
-        pass
 
-listOfPrices = ListPrices()
+listOfPrices = LiquidityFilter()
+listOfPrices._analizar() # get a list[str] with the name of every crypto to use in strategy
 
-strategyRightNow = Strategy(listOfPrices)
+strategyRightNow = Estrategia(listOfPrices.dictMoney)
 
 strategyRightNow.update(listOfPrices.update())
 flags = ConditionsToExecuteThisProgram()
