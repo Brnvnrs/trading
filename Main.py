@@ -24,6 +24,31 @@ for monedas in monedasFiltradas.listDeMonedas:
     lista = CandleList(monedas, intervalos{1} ,14)    
     #aca se aplicaria una o varias estrategias por cada moneda 
 
+# get prices => update state => execute strategy => get prices ...
+class ListPrices:    
+    def __init__(self):
+        pass
+
+listOfPrices = ListPrices()
+
+strategyRightNow = Strategy(listOfPrices)
+
+strategyRightNow.update(listOfPrices.update())
+flags = ConditionsToExecuteThisProgram()
+while(True):#for example if the conection to internet doesn't work,the binanceAPI doesn't work,etc so we can't continue
+    if(flags.status()):
+        if(strategyRightNow.currentState()):#if every flag are 
+            strategyRightNow.executeOrder()
+
+
+
+
+
+
+
+
+
+
 
 
 # def obtener_cierres(symbol: str, intervalo: str, cantidad: int = 14) -> list[float]:
