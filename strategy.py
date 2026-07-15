@@ -22,5 +22,12 @@ class Estrategia():
     #constructor
     def __init__(self,dictMoney:dict[str,CandleList]):
         self.dictMoney = dictMoney
+
+    def executeStrategyLogNormal(self):
+        for k,v in self.dictMoney.items():
+            '''we have a problem here, becouse if we want to apply an order to sell or buy we need to know '''
+            objLog = LogNormal(v)
+            if(objLog.status()):#if this object meet the condition to 
+    
     def update():
         pass 

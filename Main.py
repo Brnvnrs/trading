@@ -29,7 +29,7 @@ for monedas in monedasFiltradas.listDeMonedas:
 # get prices => update state => execute strategy => get prices ...
 
 listOfPrices = LiquidityFilter()
-listOfPrices._analizar() # get a list[str] with the name of every crypto to use in strategy
+listOfPrices.filtrar() # his atribute get a list[str] with the name of every crypto to use in strategy
 
 strategyRightNow = Estrategia(listOfPrices.dictMoney)
 
