@@ -34,13 +34,13 @@ class DataBase:
             "port":self.db_port
             })
         return res 
-    def insertData(self, currency:str,amount:float,price:float,buyOrSell:str):
+    def insertData(self, currency:str,amount:float,price:float,purchaseOrSell:str):
         ''' 
         going to insert an order 
         '''
         conn = self.conectDDBB()
         cur = conn.cursor()
-        cur.execute("INSERT INTO operaciones (moneda, monto, precio, operacion) VALUES (%s,%s,%s,%s)",(currency,amount,price,buyOrSell))
+        cur.execute("INSERT INTO operaciones (moneda, monto, precio, operacion) VALUES (%s,%s,%s,%s)",(currency,amount,price,purchaseOrSell))
         conn.commit()   # confirma la transacción, sin esto no se guarda nada
         cur.close()     # libera el cursor
         conn.close()    # cierra la conexión
