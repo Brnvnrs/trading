@@ -7,7 +7,7 @@ class CandleList():
     # lenght:int
     pricesList:list[list]
     closedPrice:list[float]
-    def __init__(self,symbol:str,period:str,length:int):
+    def __init__(self,symbol:str,period:str="Client.KLINE_INTERVAL_1HOUR",length:int="14"):
         # self.candleList=CandleList.Candle 
         """
         symbol  : par de monedas a consultar. Ej: 'BTCUSDT', 'ETHUSDT'
