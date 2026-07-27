@@ -38,7 +38,7 @@ flags = ConditionsToExecuteThisProgram()
 while(True):#for example if the conection to internet doesn't work,the binanceAPI doesn't work,etc so we can't continue
     if(flags.status()):
         if(strategyRightNow.currentState()):#if every flag are 
-            strategyRightNow.executeOrder() 
+            strategyRightNow.executeOrder()
 
 
 
