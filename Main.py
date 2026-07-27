@@ -27,6 +27,7 @@ for monedas in monedasFiltradas.listDeMonedas:
     #aca se aplicaria una o varias estrategias por cada moneda 
 
 # get prices => update state => execute strategy => get prices ...
+flags = ConditionsToExecuteThisProgram()
 
 listOfPrices = LiquidityFilter()
 listOfPrices.filtrar() # his atribute get a list[str] with the name of every crypto to use in strategy
@@ -34,9 +35,8 @@ listOfPrices.filtrar() # his atribute get a list[str] with the name of every cry
 strategyRightNow = Estrategia(listOfPrices.dictMoney)
 
 strategyRightNow.update(listOfPrices.update())
-flags = ConditionsToExecuteThisProgram()
-while(True):#for example if the conection to internet doesn't work,the binanceAPI doesn't work,etc so we can't continue
-    if(flags.status()):
+while(True):
+    if(flags.status()):#for example if the conection to internet doesn't work,the binanceAPI doesn't work,etc so we can't continue
         if(strategyRightNow.currentState()):#if every flag are 
             strategyRightNow.executeOrder()
 
