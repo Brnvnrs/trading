@@ -36,60 +36,17 @@ flags = ConditionsToExecuteTheProgram()
 
 
 
-listOfPrices = LiquidityFilter()
-listOfPrices.filtrar() # his atribute get a list[str] with the name of every crypto to use in strategy
+listOfPrices = LiquidityFilter() # we have all the values like(BTC,ETH...) 
+listOfPrices.filtrar() # we gonna filter the values(there is an explain in the module)
+btc=listOfPrices.value("btc") # this method doesn't exist now, but it represent a value  
 
-'''
-now we gonna create an object(call Estrategia) and it'll wxecute the strategy logNormal 
-'''
-strategyRightNow = Estrategia(listOfPrices.dictMoney)
+
+#we gonna take one value (BTC)
+
+stgy = Estrategia(btc)
 
 while(True):
-    if(flags.status()):#for example if the conection to internet doesn't work,the binanceAPI doesn't work,etc so we can't continue
-        if(strategyRightNow.conditionToSell()):#if we have conditions enough to buy o sell 
-            strategyRightNow.executeOrder()
-        if(strategyRightNow.conditionToPurchase()):
-            strategyRightNow.executeOrder()
+    if(flags.mains()):#it must looking for errors in the conection to internet and report
+        if(stgy.conditionsToPurchaseOrSell()):# it tell us if there are a posiblie to sell or purchase but no wich one 
+            # i'm thinking that it won't save complexity in our program becouse the 80% or 90% from the work was done 
 
-    
-    strategyRightNow.update(listOfPrices.update())
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-# def obtener_cierres(symbol: str, intervalo: str, cantidad: int = 14) -> list[float]:
-#     client = ConexionABinance().cliente()
-#     klines = client.get_historical_klines(symbol, intervalo, limit=cantidad)
-#     return [float(k[4]) for k in klines]  # índice 4 = precio de cierre
-
-# def main():
-#     symbol = input("Ingresá el símbolo (ej: BTCUSDT): ").upper()
-
-#     print("\nIntervalos disponibles:")
-#     for key in INTERVALOS:
-#         print(f"  {key}")
-
-#     eleccion = input("\nElegí el intervalo: ").strip()
-
-#     if eleccion not in INTERVALOS:
-#         print("Intervalo no válido.")
-#         return
-
-#     cierres = obtener_cierres(symbol, INTERVALOS[eleccion])
-
-#     print(f"\nÚltimos 14 cierres de {symbol} en intervalo {eleccion}:")
-#     for i, precio in enumerate(cierres, 1):
-#         print(f"  {i:>2}. {precio:.4f} USDT")
-
-# if __name__ == "__main__":
-#     main()

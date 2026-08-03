@@ -36,7 +36,9 @@ class Estrategia():
 
 
     def conditionToSell()->bool:
+        
         pass
+
     def conditionToPurchase()->bool:
         pass
     
