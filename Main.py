@@ -26,19 +26,35 @@ for monedas in monedasFiltradas.listDeMonedas:
     lista = CandleList(monedas, intervalos{1} ,14)    
     #aca se aplicaria una o varias estrategias por cada moneda 
 
+# the main idea
 # get prices => update state => execute strategy => get prices ...
-flags = ConditionsToExecuteThisProgram()
+
+#we need to know if the conditions are well 
+#if the conection to internet is good or we can't conect to the data base and more 
+# WE NEED TO KNOW THAT
+flags = ConditionsToExecuteTheProgram()
+
+
 
 listOfPrices = LiquidityFilter()
 listOfPrices.filtrar() # his atribute get a list[str] with the name of every crypto to use in strategy
 
+'''
+now we gonna create an object(call Estrategia) and it'll wxecute the strategy logNormal 
+'''
 strategyRightNow = Estrategia(listOfPrices.dictMoney)
 
-strategyRightNow.update(listOfPrices.update())
 while(True):
     if(flags.status()):#for example if the conection to internet doesn't work,the binanceAPI doesn't work,etc so we can't continue
-        if(strategyRightNow.currentState()):#if every flag are 
+        if(strategyRightNow.conditionToSell()):#if we have conditions enough to buy o sell 
             strategyRightNow.executeOrder()
+        if(strategyRightNow.conditionToPurchase()):
+            strategyRightNow.executeOrder()
+
+    
+    strategyRightNow.update(listOfPrices.update())
+
+    
 
 
 

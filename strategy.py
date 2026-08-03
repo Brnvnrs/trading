@@ -2,7 +2,7 @@
 from binance_connection import ConexionABinance
 import numpy as np
 from CandleList import CandleList
-
+from ExecuteOrder import ExecuteOrder
 
 class PrecioActual(ConexionABinance):
     
@@ -33,7 +33,10 @@ class Estrategia():
         for k,v in self.dictMoney.items():
             '''we have a problem here, becouse if we want to apply an order to sell or buy we need to know '''
             objLog = LogNormal(v)
-            if(objLog.canWeExecuteAnOrder()):#if this object meet the conditions for example if we have money we have to sell
-                
-    def update():
-        pass 
+
+
+    def conditionToSell()->bool:
+        pass
+    def conditionToPurchase()->bool:
+        pass
+    
